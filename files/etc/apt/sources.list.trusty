@@ -1,0 +1,6 @@
+## Integrative.it Mirror APT
+
+deb http://mirror.integrative.it/ubuntu trusty main universe restricted multiverse
+deb http://mirror.integrative.it/ubuntu/ trusty-security restricted main multiverse universe
+deb http://mirror.integrative.it/ubuntu trusty-updates restricted main multiverse universe
+deb http://archive.canonical.com/ubuntu trusty partner

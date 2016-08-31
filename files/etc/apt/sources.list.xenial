@@ -1,0 +1,6 @@
+## Integrative.it Mirror APT
+
+deb http://mirror.integrative.it/ubuntu xenial main universe restricted multiverse
+deb http://mirror.integrative.it/ubuntu/ xenial-security restricted main multiverse universe
+deb http://mirror.integrative.it/ubuntu xenial-updates restricted main multiverse universe
+deb http://archive.canonical.com/ubuntu xenial partner

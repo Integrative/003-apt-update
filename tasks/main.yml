@@ -1,0 +1,45 @@
+---
+
+- template: src=files/etc/apt/sources.list.xenial dest=/etc/apt/sources.list
+  when: (ansible_distribution == "Ubuntu") and (ansible_distribution_release =="xenial")
+
+- template: src=files/etc/apt/sources.list.trusty dest=/etc/apt/sources.list
+  when: (ansible_distribution == "Ubuntu") and (ansible_distribution_release =="trusty")
+
+- name: apt update -upgrade
+  apt: update-cache=yes cache_valid_time=3600 upgrade=dist
+  retries: 3
+  delay: 1
+  ignore_errors: yes
+  register: apt_updated
+
+- name: Verify or Install core apps
+  apt: state=latest name={{ item }}
+  with_items:
+    - htop
+    - iftop
+    - wget
+    - open-vm-tools
+
+- name: Adjust APT update intervals
+  copy: src=files/etc/apt/apt.conf.d/10periodic dest=/etc/apt/apt.conf.d/10periodic
+
+- stat: path=/var/run/reboot-required
+  register: rb
+
+- name: reboot
+  shell: sleep 2 && /sbin/shutdown -r now removes=/var/run/reboot-required
+  async: 1
+  poll: 0
+  become: true
+  ignore_errors: true
+  when: rb.stat.exists
+
+- name: wait for server
+  local_action: wait_for host={{ inventory_hostname }} port=22 delay=1 timeout=60
+
+- name: apt update - Autoremove
+  command: apt-get autoremove -y
+  become: yes
+  register: autoremove_result
+  changed_when: "'0 upgraded' not in autoremove_result.stdout"
