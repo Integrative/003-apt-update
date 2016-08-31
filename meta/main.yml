@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Integrative.it
+  author: "J.Kool"
   description: APT-update for Ubuntu
   company: Integrative Global Ltd
   license: MIT
@@ -14,3 +14,4 @@ galaxy_info:
     - system
     - installer
     - apt
+  dependencies: []
