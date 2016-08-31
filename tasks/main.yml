@@ -4,6 +4,9 @@
 # Sets sources to Integrative mirror
 # Sets Autoupdate
 # Installs default apps from APT
+#
+#
+
 - template: src=files/etc/apt/sources.list.xenial dest=/etc/apt/sources.list
   when: (ansible_distribution == "Ubuntu") and (ansible_distribution_release =="xenial")
 
