@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Integrative.it
+  description: APT-update for Ubuntu
+  company: Integrative Global Ltd
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+    - xenial
+  galaxy_tags:
+    - system
+    - installer
+    - apt
